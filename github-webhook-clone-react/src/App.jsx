@@ -32,7 +32,7 @@ function App() {
     axios.post("/api/webhooks", {
       ...formData,
       eventTypes: formData.eventTypes
-        .filter((item) => !item.checked)
+        .filter((item) => item.checked)
         .map((item) => item.key),
     });
   };
@@ -126,10 +126,10 @@ function App() {
               })}
             </div>
             <button
-              className="mt-4 bg-purple-500 text-white px-4 py-2 rounded-xl"
+              className="mt-4 bg-purple-500 text-white px-4 py-2 rounded-xl cursor-pointer hover:bg-purple-600 active:bg-purple-700 active:scale-95 transition-all duration-150"
               type="submit"
             >
-              Register Webhook
+              <span>Register Webhook</span>
             </button>
           </form>
 
@@ -137,15 +137,17 @@ function App() {
             <h2>Emulate Events</h2>
             <div className="flex items-center gap-4">
               {eventsList.map((eventType) => {
-                <button
-                  key={eventType.key}
-                  className="mt-4 bg-green-500 text-white px-4 py-2 rounded-xl"
-                  onClick={() => {
-                    handleEventHappened(eventType.key);
-                  }}
-                >
-                  {eventType.title}
-                </button>;
+                return (
+                  <button
+                    key={eventType.key}
+                    className="mt-4 bg-green-500 text-white px-4 py-2 rounded-xl cursor-pointer hover:bg-green-600 active:bg-green-700 active:scale-95 transition-all duration-150"
+                    onClick={() => {
+                      handleEventHappened(eventType.key);
+                    }}
+                  >
+                    {eventType.title}
+                  </button>
+                );
               })}
             </div>
           </div>
