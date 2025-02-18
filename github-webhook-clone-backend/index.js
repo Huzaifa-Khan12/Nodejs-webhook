@@ -38,11 +38,12 @@ app.post("/api/event-emulate", (req, res) => {
     const webhookList = webhooks[type];
 
     //looping through the "webhook['COMMIT'] element" array of objects
-    for (let i = 0; i < webhookList.lenght; i++) {
+    for (let i = 0; i < webhookList.length; i++) {
       //storing individual object from the array of objects
       const curWebhook = webhookList[i];
       //destructuring the object into variable
       const { payloadUrl, secret } = curWebhook;
+
       //calling the payloadUrl using axios
       try {
         await axios.post(payloadUrl, data, {
@@ -60,7 +61,7 @@ app.post("/api/event-emulate", (req, res) => {
 });
 
 //testing to see how the object passed looks like
-app.get("/api/test", (req, res) => {
+app.get("/test", (req, res) => {
   res.json(webhooks);
 });
 
